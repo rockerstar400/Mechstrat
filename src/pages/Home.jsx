@@ -155,7 +155,7 @@ export default function HomePage() {
                 <div className="container mx-auto max-w-6xl">
                     {/* Heading */}
                     <div className="text-center mb-12">
-                        <h2 className="font-[Poppins] font-normal text-[#111827] text-[50px] leading-[40px] flex items-center justify-center text-center mb-2">Leadership Profile</h2>
+                        <h2 className=" font-normal text-[#111827] text-[50px] leading-[40px] flex items-center justify-center text-center mb-2">Leadership Profile</h2>
                         <div className="w-24 h-1 bg-teal-500 mx-auto mt-4"></div>
                     </div>
 

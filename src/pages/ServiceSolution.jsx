@@ -400,21 +400,27 @@ export default function AISolutionProvidersPage() {
                         </div>
                     </div>
                 </section>
+                         
+                
+                            {/* Footer */}
+                      
 
 
                 {/* Footer */}
           
             </div>
-              <footer className="bg-[#1695A3] py-8 px-6">
-                <div className="container mx-auto text-center">
-                    <p className="text-white text-sm mb-2">
-                        © 2025 · MechStrat Global. All rights reserved.
-                    </p>
-                    <p className="text-white/90 text-sm">
-                        Business Strategy for a Smarter Manufacturing World
-                    </p>
-                </div>
-            </footer>
+
+                  <footer className="bg-[#1695A3] py-8 px-6">
+                                <div className="container mx-auto text-center">
+                                    <p className="text-white text-sm mb-2">
+                                        © 2025 · MechStrat Global. All rights reserved.
+                                    </p>
+                                    <p className="text-white/90 text-sm">
+                                        Business Strategy for a Smarter Manufacturing World
+                                    </p>
+                                </div>
+                            </footer>
+          
 
         </div>
     );
