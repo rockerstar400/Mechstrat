@@ -26,7 +26,7 @@ export default function ContactUs() {
 
       {/* Hero Section */}
       <section
-        className="relative bg-cover bg-center h-[700px] flex items-end justify-center text-white"
+        className="relative bg-cover bg-center h-[700px] flex items-center justify-center text-white"
         style={{
           backgroundImage: `url(${banner})`,
         }}
@@ -102,7 +102,7 @@ export default function ContactUs() {
               </div>
               <div>
                 <p className="font-semibold">📧 Email</p>
-                <p className="text-[#1695A3]">info@gmarc.com.au</p>
+                <p className="text-[#1695A3]">info@mechstratglobal.com</p>
               </div>
             </div>
           </div>

@@ -29,31 +29,40 @@ export default function LeadershipProfilePage() {
         <div className="min-h-screen bg-white">
             {/* Hero Section */}
 
-            <div className="relative  w-full">
-                {/* Header – positioned on top of the hero */}
-                <div className="absolute top-0 left-0 right-0 z-50">
+            
                     <Header />
-                </div>
+    
 
                 {/* Hero Banner – full-bleed, starts at the very top */}
-                <section
-                    className="relative bg-cover w-full bg-center h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[85vh] flex items-end justify-center text-white"
+                {/* <section
+                    className="relative bg-cover bg-center h-[700px] flex items-center justify-center text-white"
                     style={{
                         backgroundImage: `url(${bannner})`,
                         backgroundPosition: "center center",
                         backgroundSize: "cover",
                     }}
-                >
+                > */}
                     {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-800/70 to-teal-900/60"></div>
+                    {/* <div className="absolute inset-0 bg-black/50"></div> */}
 
                     {/* Content */}
-                    <div className="relative z-10 text-center max-w-5xl mx-auto px-4 sm:px-6 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
+                {/* <div className="container mx-auto max-w-6xl text-center relative z-10 px-6">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal leading-tight tracking-wide text-white">
                             Leadership Profile
                         </h1>
                     </div>
-                </section>
+                </section> */}
+                 <section
+                        className="relative bg-cover bg-center h-[700px] flex items-center justify-center text-white"
+                        style={{
+                          backgroundImage: `url(${bannner})`,
+                        }}
+                      >
+                        <div className="absolute inset-0 bg-black/50"></div>
+                        <h1 className="relative z-10 text-4xl md:text-5xl font-semibold mb-8">
+                             Leadership Profile
+                        </h1>
+                      </section>
 
 
 
@@ -78,7 +87,7 @@ export default function LeadershipProfilePage() {
 
 
                 {/* Leadership Profile Section */}
-                <section className="py-12 bg-white">
+                <section className="py-12 px-4 bg-white">
                     <div className="max-w-6xl mx-auto px:4 sm:px-6">
                         {/* Section Title */}
                         <div className="mb-8">
@@ -91,7 +100,7 @@ export default function LeadershipProfilePage() {
                         </div>
 
                         {/* Professional Expertise Heading */}
-                        <h3 className="text-2xl font-semibold text-gray-900 mb-8 text-center">Professional Expertise</h3>
+                        <h3 className="text-2xl font-semibold text-gray-900 mb-8 px-0 text-center">Professional Expertise</h3>
 
                         {/* Content Grid - Manufacturing Technologies */}
                         <div className="grid md:grid-cols-2 gap-12 mb-12 items-center bg-[#E7F5F6]">
@@ -105,7 +114,7 @@ export default function LeadershipProfilePage() {
                             </div>
 
                             {/* Right - Content */}
-                            <div className="order-1 md:order-2">
+                            <div className="order-1 px-2 md:order-2">
                                 <h4 className="text-2xl font-semibold text-gray-900 mb-6">Manufacturing Technologies:</h4>
                                 <ul className="space-y-3 text-gray-700">
                                     <li className="flex items-start"><span className="text-gray-900 mr-3">•</span><span>Metal Injection Molding (MIM).</span></li>
@@ -169,7 +178,7 @@ export default function LeadershipProfilePage() {
                             </div>
 
                             {/* Right - Content */}
-                            <div className="order-1 md:order-2">
+                            <div className="order-1 px-2 md:order-2">
                                 <h4 className="text-2xl font-semibold text-gray-900 mb-6">Industry Exposure:</h4>
                                 <ul className="space-y-3 text-gray-700">
                                     <li className="flex items-start"><span className="text-gray-900 mr-3 mt-1">•</span><span>Automotive.</span></li>
@@ -187,100 +196,117 @@ export default function LeadershipProfilePage() {
                     </div>
                 </section>
 
-                <section className="bg-[#FAFBFB] py-20">
-                    <div className="max-w-6xl mx-auto px-6">
-                        {/* ================== SECTION HEADER ================== */}
-                        <div className="mb-10">
-                            <h2 className="text-4xl font-semibold text-gray-900 relative inline-block">
-                                Consulting Vision:
-                                <span className="absolute left-0 -bottom-2 w-24 h-[3px] bg-teal-500"></span>
-                            </h2>
-                            <p className="text-gray-600 text-base leading-relaxed max-w-3xl mt-6">
-                                Through <span className="font-semibold text-gray-900">MechStrat Global</span>, we fuse our{" "}
-                                <span className="font-semibold text-gray-900">passion for manufacturing excellence</span> with{" "}
-                                <span className="font-semibold text-gray-900">advanced AI technologies</span> to deliver measurable, sustainable
-                                business transformation.
-                            </p>
+               <section className="bg-[#FAFBFB] py-20">
+    <div className="max-w-6xl mx-auto px-6">
+        {/* ================== SECTION HEADER ================== */}
+        <div className="mb-10">
+            <h2 className="text-4xl font-semibold text-gray-900 relative inline-block">
+                Consulting Vision:
+                <span className="absolute left-0 -bottom-2 w-24 h-[3px] bg-teal-500"></span>
+            </h2>
+            <p className="text-gray-600 text-base leading-relaxed max-w-3xl mt-6">
+                Through <span className="font-semibold text-gray-900">MechStrat Global</span>, we fuse our{" "}
+                <span className="font-semibold text-gray-900">passion for manufacturing excellence</span> with{" "}
+                <span className="font-semibold text-gray-900">advanced AI technologies</span> to deliver measurable, sustainable
+                business transformation.
+            </p>
+        </div>
+
+        {/* ================== CARDS SECTION ================== */}
+        <div className="relative flex items-center">
+            {/* Left Arrow */}
+            <button 
+                onClick={() => {
+                    const container = document.getElementById('cards-container');
+                    container.scrollBy({ left: -300, behavior: 'smooth' });
+                }}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-md"
+            >
+                <ChevronRight className="rotate-180 text-gray-600" size={22} />
+            </button>
+
+            {/* Cards */}
+            <div 
+                id="cards-container"
+                className="flex gap-6 overflow-x-auto scrollbar-hide w-full px-10 scroll-smooth"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+                {[
+                    {
+                        title: "Built the Business",
+                        icon: (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                            />
+                        ),
+                    },
+                    {
+                        title: "Accelerated & Expanded the Growth",
+                        icon: (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                            />
+                        ),
+                    },
+                    {
+                        title: "Operational & Digital Problem Solving",
+                        icon: (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                            />
+                        ),
+                    },
+                    {
+                        title: "Global Value Chain Optimization",
+                        icon: (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                            />
+                        ),
+                    },
+                ].map((item, index) => (
+                    <div key={index} className="flex-shrink-0 w-64 text-center">
+                        <div className="bg-teal-50 p-6 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-sm">
+                            <svg
+                                className="w-10 h-10 text-teal-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                {item.icon}
+                            </svg>
                         </div>
+                        <h4 className="font-semibold text-gray-900 text-base leading-snug">
+                            {item.title}
+                        </h4>
+                    </div>
+                ))}
+            </div>
 
-                        {/* ================== CARDS SECTION ================== */}
-                        <div className="relative flex items-center">
-                            {/* Left Arrow */}
-                            <button className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200 hover:bg-gray-300 rounded-full p-2 shadow-md">
-                                <ChevronRight className="rotate-180 text-gray-600" size={22} />
-                            </button>
-
-                            {/* Cards */}
-                            <div className="flex justify-between gap-6 overflow-hidden w-full px-10">
-                                {[
-                                    {
-                                        title: "Built the Business",
-                                        icon: (
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                                            />
-                                        ),
-                                    },
-                                    {
-                                        title: "Accelerated & Expanded the Growth",
-                                        icon: (
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                                            />
-                                        ),
-                                    },
-                                    {
-                                        title: "Operational & Digital Problem Solving",
-                                        icon: (
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                                            />
-                                        ),
-                                    },
-                                    {
-                                        title: "Global Value Chain Optimization",
-                                        icon: (
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                                            />
-                                        ),
-                                    },
-                                ].map((item, index) => (
-                                    <div key={index} className="flex-1 text-center">
-                                        <div className="bg-teal-50 p-6 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-sm">
-                                            <svg
-                                                className="w-10 h-10 text-teal-600"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                {item.icon}
-                                            </svg>
-                                        </div>
-                                        <h4 className="font-semibold text-gray-900 text-base leading-snug">
-                                            {item.title}
-                                        </h4>
-                                    </div>
-                                ))}
-                            </div>
-
-                            {/* Right Arrow */}
-                            <button className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-teal-600 hover:bg-teal-700 rounded-full p-2 shadow-md">
-                                <ChevronRight className="text-white" size={22} />
-                            </button>
-                        </div>
+            {/* Right Arrow */}
+            <button 
+                onClick={() => {
+                    const container = document.getElementById('cards-container');
+                    container.scrollBy({ left: 300, behavior: 'smooth' });
+                }}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-teal-600 hover:bg-teal-700 rounded-full p-2 shadow-md"
+            >
+                <ChevronRight className="text-white" size={22} />
+            </button>
+        </div>
+    
 
                         {/* ================== PROGRESS DOTS ================== */}
                         <div className="flex justify-center gap-2 mt-8">
@@ -452,6 +478,6 @@ export default function LeadershipProfilePage() {
 
 
             </div>
-        </div>
+        
     );
 }

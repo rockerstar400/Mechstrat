@@ -55,7 +55,7 @@ export default function ManufacturingCompaniesPage() {
             <Header />
             {/* Hero Section */}
             <section
-                className="relative bg-cover bg-center h-[630px] flex items-end justify-end text-white"
+                className="relative bg-cover bg-center h-[630px] flex items-center justify-center "
                 style={{
                     backgroundImage: `url(${bannner})`,
                     backgroundPosition: 'center center'

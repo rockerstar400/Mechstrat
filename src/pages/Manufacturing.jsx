@@ -35,7 +35,7 @@
 
         {/* Hero Banner */}
         <section
-          className="relative bg-cover h-[630px] bg-center flex items-end justify-end  "
+          className="relative bg-cover h-[630px] bg-center flex items-center justify-center  "
           style={{
             backgroundImage: `url(${Aibaner})`,
           }}
@@ -44,7 +44,7 @@
           {/* <div className="absolute inset-0 "></div> */}
 
           {/* Content */}
-          <div className="container mx-auto max-w-6xl text-center relative z-10 py-6 ">
+          <div className="container mx-auto max-w-6xl text-center justify-center relative z-10 px-6">
             <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg ">
               For Manufacturing Companies
             </h1>
@@ -57,7 +57,7 @@
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
               Business Consulting & Growth Strategy
             </h2>
-            <div className="w-64 h-1 bg-black mb-8"></div>
+            <div className="w-64 h-1 bg-teal-500 mb-8"></div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Left Side - Text Content */}
@@ -72,15 +72,15 @@
                     <img
                       src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
                       alt="Manufacturing Performance Dashboard"
-                      className="w-full h-64 object-cover opacity-80"
+                      className="w-full h-64 object-cover "
                     />
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    {/* <div className="p-6 text-center text-white  ">
                       <div className="text-center text-white">
                         <h3 className="text-2xl font-bold mb-2">Manufacturing</h3>
                         <h3 className="text-2xl font-bold mb-2">Performance</h3>
                         <h3 className="text-2xl font-bold">Dashboard</h3>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -142,9 +142,9 @@
                     className="w-full h-full object-cover opacity-70"
                   />
                   {/* Dashboard Overlay */}
-                  <div className="absolute inset-0 p-6">
+                  {/* <div className="absolute inset-0 p-6">
                     {/* Title */}
-                    <div className="text-white text-center mb-8">
+                    {/* <div className="text-white text-center mb-8">
                       <h3 className="text-2xl font-bold">Manufacturing</h3>
                       <h3 className="text-2xl font-bold">Performance</h3>
                       <h3 className="text-2xl font-bold mb-1">Dashboard</h3>
@@ -152,7 +152,7 @@
                     </div>
 
                     {/* Chart Elements - Decorative */}
-                    <div className="absolute bottom-8 left-6 right-6">
+                    {/* <div className="absolute bottom-8 left-6 right-6">
                       <div className="grid grid-cols-3 gap-4 mb-4">
                         <div className="bg-green-500/20 backdrop-blur-sm rounded p-2 text-center">
                           <BarChart3 className="w-6 h-6 text-green-400 mx-auto mb-1" />
@@ -168,7 +168,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */} 
                 </div>
               </div>
             </div>
@@ -179,12 +179,13 @@
 
 
             {/* Carousel Container */}
-            <div className="relative bg-gray-50 rounded-3xl p-8 md:p-16 max-w-6xl mx-auto">
+            <div className="relative bg-white rounded-3xl p-8 md:p-16 max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2  text-left">
                 Manufacturing Process & Capex Optimization
               </h2>
-              <div className="w-80 h-1 bg-teal-500 mb-8 mx-auto"></div>
+              {/* <div className="w-80 h-1 bg-teal-500 mb-8 mx-auto"></div> */}
 
+<div className="w-64 h-1 bg-teal-500 mb-8"></div>
               <p className="text-gray-700 text-center mb-12 leading-relaxed max-w-4xl mx-auto">
                 To remain competitive, manufacturers must continually evaluate and upgrade their production processes. We call this service Manufacturing Process & Investment Optimization as it clearly focuses on technical benefits and cost savings.
               </p>

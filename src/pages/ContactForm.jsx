@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-  import Aibaner from "../assets/Aicompany.png"
-
-
+import Aibaner from "../assets/Aicompany.png";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -14,47 +11,65 @@ export default function ContactForm() {
     description: "",
   });
 
+  const [loading, setLoading] = useState(false); 
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    // emailjs
-    //   .send(
-    //     "YOUR_SERVICE_ID", 
-    //     "YOUR_TEMPLATE_ID",
-    //     formData,
-    //     "YOUR_PUBLIC_KEY"  
-    //   )
-    // .then(
-    //   () => alert("✅ Email sent successfully!"),
-    //   (error) => alert("❌ Failed to send email: " + error.text)
-    // );
+    try {
+      const response = await fetch("http://localhost:5000/api/form/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert("✅ Form submitted successfully! Check Ethereal inbox or preview link.");
+        console.log("📬 Preview URL:", data.preview);
+
+        setFormData({
+          name: "",
+          company: "",
+          datetime: "",
+          timezone: "",
+          description: "",
+        });
+      } else {
+        alert(" Failed to send form. Try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert(" Something went wrong. Please check the console.");
+    } finally {
+      setLoading(false);
+    }
   };
-
 
   return (
     <div className="bg-gray-50 font-sans">
-      <Header/>
-       <section
-                className="relative bg-cover h-[630px] bg-center flex items-end justify-end  "
-                style={{
-                  backgroundImage: `url(${Aibaner})`,
-                }}
-              >
-                {/* Overlay */}
-                {/* <div className="absolute inset-0 "></div> */}
-      
-                {/* Content */}
-                <div className="container mx-auto max-w-6xl text-center relative z-10 py-6 ">
-                  <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg ">
-                    For Manufacturing Companies
-                  </h1>
-                </div>
-              </section>
+      <Header />
+         <section
+          className="relative bg-cover h-[630px] bg-center flex items-center justify-center"
+          style={{
+            backgroundImage: `url(${Aibaner})`,
+          }}
+        >
+          <div className="container mx-auto max-w-6xl text-center relative z-10 px-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
+              
+            </h1> 
+        </div>
+        </section> 
 
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-8 px-4">
         <form
           onSubmit={handleSubmit}
           className="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-lg space-y-6"
@@ -117,12 +132,12 @@ export default function ContactForm() {
               placeholder="e.g. GMT+5:30 (India)"
               value={formData.timezone}
               onChange={handleChange}
-              required
+              
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
           </div>
 
-          {/* Project Description */}
+          {/* Description */}
           <div>
             <label className="block text-gray-700 font-medium mb-2">
               Project Description (max 500 chars)
@@ -145,15 +160,15 @@ export default function ContactForm() {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 rounded-lg transition-all"
+            disabled={loading}
+            className={`w-full ${
+              loading ? "bg-gray-400" : "bg-teal-600 hover:bg-teal-700"
+            } text-white font-semibold py-3 rounded-lg transition-all`}
           >
-            Submit Form
+            {loading ? "Submitting..." : "Submit Form"}
           </button>
         </form>
       </div>
     </div>
-  )
-
-
-
+  );
 }

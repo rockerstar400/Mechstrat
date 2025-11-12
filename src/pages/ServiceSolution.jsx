@@ -35,7 +35,7 @@ export default function AISolutionProvidersPage() {
 
             {/* Hero Banner */}
             <section
-                className="relative bg-cover bg-center h-[600px] flex items-end justify-center text-white mb-8"
+                className="relative bg-cover bg-center h-[600px] flex items-center justify-center text-white mb-8"
                 style={{
                     backgroundImage: `url(${AIsolution})`,
                 }}
@@ -44,7 +44,7 @@ export default function AISolutionProvidersPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-800/80 via-gray-700/70 to-teal-600/60"></div>
 
                 {/* Content */}
-                <div className="container mx-auto max-w-6xl text-center relative z-10">
+                <div className="container mx-auto max-w-6xl text-center relative z-10 px-6">
                     <h1 className=" font-normal text-[64px] leading-[60px] tracking-[0] text-white text-center drop-shadow-lg mb-8">
                         For AI Solution Providers
                     </h1>
