@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../components/Header";
-import Aibaner from "../assets/Aicompany.png";
+// import Aibaner from "../assets/Aicompany.png";
+import Aibaner from "../assets/projectbanner.png";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -10,20 +11,32 @@ export default function ContactForm() {
     timezone: "",
     description: "",
   });
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  console.log("BASE_URL =", BASE_URL);
 
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "name" && /\d/.test(value)) {
+      return;
+    }
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  
+  const handleKeyPress = (e) => {
+    if (/[0-9]/.test(e.key)) {
+      e.preventDefault();
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/form/send-email", {
+      const response = await fetch(`${BASE_URL}api/form/send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -32,7 +45,7 @@ export default function ContactForm() {
       const data = await response.json();
 
       if (data.success) {
-        alert("✅ Form submitted successfully! Check Ethereal inbox or preview link.");
+        alert("✅ Form submitted successfully!");
         console.log("📬 Preview URL:", data.preview);
 
         setFormData({
@@ -56,18 +69,16 @@ export default function ContactForm() {
   return (
     <div className="bg-gray-50 font-sans">
       <Header />
-         <section
-          className="relative bg-cover h-[630px] bg-center flex items-center justify-center"
-          style={{
-            backgroundImage: `url(${Aibaner})`,
-          }}
-        >
-          <div className="container mx-auto max-w-6xl text-center relative z-10 px-6">
-            <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
-              
-            </h1> 
+      <section
+        className="relative bg-cover h-[630px] bg-center flex items-center justify-center"
+        style={{
+          backgroundImage: `url(${Aibaner})`,
+        }}
+      >
+        <div className="container mx-auto max-w-6xl text-center relative z-10 px-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg"></h1>
         </div>
-        </section> 
+      </section>
 
       <div className="min-h-screen bg-gray-50 flex items-center justify-center py-8 px-4">
         <form
@@ -86,6 +97,7 @@ export default function ContactForm() {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              // onKeyPress={handleKeyPress}
               required
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
@@ -108,13 +120,16 @@ export default function ContactForm() {
 
           {/* Date & Time */}
           <div>
-            <label className="block text-gray-700 font-medium mb-2">
-              Date / Time
-            </label>
+            <label className="block text-gray-700 font-medium mb-2">Date</label>
             <input
-              type="datetime-local"
+              type={formData.datetime ? "datetime-local" : "text"}
               name="datetime"
               value={formData.datetime}
+              placeholder="d/m/y : --"
+              onFocus={(e) => (e.target.type = "datetime-local")}
+              onBlur={(e) => {
+                if (!formData.datetime) e.target.type = "text";
+              }}
               onChange={handleChange}
               required
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
@@ -124,7 +139,7 @@ export default function ContactForm() {
           {/* Timezone */}
           <div>
             <label className="block text-gray-700 font-medium mb-2">
-              Timezone
+              Time-zone
             </label>
             <input
               type="text"
@@ -132,7 +147,6 @@ export default function ContactForm() {
               placeholder="e.g. GMT+5:30 (India)"
               value={formData.timezone}
               onChange={handleChange}
-              
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
           </div>
@@ -140,20 +154,20 @@ export default function ContactForm() {
           {/* Description */}
           <div>
             <label className="block text-gray-700 font-medium mb-2">
-              Project Description (max 500 chars)
+              Project Description
             </label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
-              maxLength="500"
+              maxLength="1000"
               rows="5"
               placeholder="Tell us briefly about your project..."
               required
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
             />
             <p className="text-gray-500 text-sm text-right">
-              {formData.description.length}/500
+              {formData.description.length}/1000
             </p>
           </div>
 
