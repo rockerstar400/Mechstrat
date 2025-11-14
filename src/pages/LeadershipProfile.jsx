@@ -18,19 +18,94 @@ export default function LeadershipProfilePage() {
     name: "",
     company: "",
     email: "",
+
     message: "",
   });
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  console.log("BASE_URL =", BASE_URL);
+  const [status, setStatus] = useState({ type: "", message: "" });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    // Validation while typing
+    if (name === "name" || name === "company") {
+      // block numbers & special characters
+      const cleaned = value.replace(/[^a-zA-Z\s]/g, "");
+      setFormData({ ...formData, [name]: cleaned });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
-  const handleSubmit = () => {
-    console.log("Form submitted:", formData);
-    alert("Thank you for reaching out! We will get back to you soon.");
-    // Add your form submission logic here
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ type: "", message: "" });
+
+    // 🔍 Frontend Validation
+    if (!formData.name.trim()) {
+      return setStatus({ type: "error", message: "Name is required" });
+    }
+
+    if (!/^[a-zA-Z\s]+$/.test(formData.name)) {
+      return setStatus({
+        type: "error",
+        message: "Name must contain only alphabets",
+      });
+    }
+
+    if (!formData.company.trim()) {
+      return setStatus({ type: "error", message: "Company is required" });
+    }
+
+    if (!/^[a-zA-Z\s]+$/.test(formData.company)) {
+      return setStatus({
+        type: "error",
+        message: "Company must contain only alphabets",
+      });
+    }
+
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+      return setStatus({ type: "error", message: "Invalid email address" });
+    }
+
+    if (!formData.message.trim()) {
+      return setStatus({ type: "error", message: "Message is required" });
+    }
+
+    // 🚀 Send data to backend
+    try {
+      const response = await fetch(`${BASE_URL}/api/growth-form/send-email`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setStatus({
+          type: "success",
+          message: "✅ Message sent successfully!",
+        });
+
+        // Reset form
+        setFormData({
+          name: "",
+          company: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        setStatus({
+          type: "error",
+          message: result.message || "❌ Failed to send message",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setStatus({ type: "error", message: "❌ Server not reachable" });
+    }
   };
   return (
     <div className="min-h-screen bg-white">
@@ -481,75 +556,99 @@ export default function LeadershipProfilePage() {
 
             {/* Right Side - Contact Form */}
             <div className="animate-slideInRight">
-              <div className="space-y-6">
-                {/* Name Field */}
-                <div className="transition-all duration-500 hover:scale-[1.01]">
-                  <label className="block text-[#111827] font-medium mb-2">
-                    Name <span className="text-[#111827]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-300"
-                  />
-                </div>
+              <div>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name */}
+                  <div>
+                    <label className="block text-[#111827] font-medium mb-2">
+                      Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    />
+                  </div>
 
-                {/* Company Field */}
-                <div className="transition-all duration-500 hover:scale-[1.01]">
-                  <label className="block text-[#111827] font-medium mb-2">
-                    Company <span className="text-[#111827]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    placeholder="Your company"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-300"
-                  />
-                </div>
+                  {/* Company */}
+                  <div>
+                    <label className="block text-[#111827] font-medium mb-2">
+                      Company <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      placeholder="Your company"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    />
+                  </div>
 
-                {/* Email Field */}
-                <div className="transition-all duration-500 hover:scale-[1.01]">
-                  <label className="block text-[#111827] font-medium mb-2">
-                    Email <span className="text-[#111827]">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your.email@company.com"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-300"
-                  />
-                </div>
+                  {/* Email */}
+                  <div>
+                    <label className="block text-[#111827] font-medium mb-2">
+                      Email <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="your.email@company.com"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    />
+                  </div>
 
-                {/* Message Field */}
-                <div className="transition-all duration-500 hover:scale-[1.01]">
-                  <label className="block text-[#111827] font-medium mb-2">
-                    Message <span className="text-[#111827]">*</span>
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your needs..."
-                    rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none transition-all duration-300"
-                  />
-                </div>
+                  {/* Phone */}
+                  <div></div>
 
-                {/* Submit Button */}
-                <button
-                  onClick={handleSubmit}
-                  className="w-full bg-[#1695A3] hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 hover:animate-[bounce_1s_ease-in-out]"
-                >
-                  Schedule a Consultation
-                  <Send className="w-5 h-5" />
-                </button>
+                  {/* Message */}
+                  <div>
+                    <label className="block text-[#111827] font-medium mb-2">
+                      Message <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell us about your needs..."
+                      rows={5}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
+                    />
+                  </div>
+
+                  {/* Status Message */}
+                  {status.message && (
+                    <p
+                      className={`text-sm ${
+                        status.type === "error"
+                          ? "text-red-500"
+                          : "text-green-600"
+                      }`}
+                    >
+                      {status.message}
+                    </p>
+                  )}
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    disabled={
+                      !formData.name ||
+                      !formData.company ||
+                      !formData.email ||
+                      !formData.message
+                    }
+                    className="w-full bg-[#1695A3] hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    Schedule a Consultation
+                    <Send className="w-5 h-5" />
+                  </button>
+                </form>
               </div>
             </div>
           </div>

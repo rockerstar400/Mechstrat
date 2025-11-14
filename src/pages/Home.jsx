@@ -1,5 +1,3 @@
-// pages/HomePage.jsx (या जहां भी आप इसे रखना पसंद करें)
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -67,39 +65,36 @@ export default function HomePage() {
     if (!formData.name.trim()) {
       return setStatus({ type: "error", message: "Name is required" });
     }
-    if (!formData.company.trim()) {
-      return setStatus({ type: "error", message: "Company is required" });
-    }
+
     if (!/^[a-zA-Z\s]+$/.test(formData.name)) {
       return setStatus({
         type: "error",
         message: "Name must contain only alphabets",
       });
     }
+
+    if (!formData.company.trim()) {
+      return setStatus({ type: "error", message: "Company is required" });
+    }
+
     if (!/^[a-zA-Z\s]+$/.test(formData.company)) {
       return setStatus({
-        phone: "",
-        countryCode: "+91",
         type: "error",
         message: "Company must contain only alphabets",
       });
     }
+
     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
       return setStatus({ type: "error", message: "Invalid email address" });
     }
-    // if (!formData.phone || formData.phone.length !== 10) {
-    //   return setStatus({
-    //     type: "error",
-    //     message: "Phone number must be exactly 10 digits",
-    //   });
-    // }
+
     if (!formData.message.trim()) {
       return setStatus({ type: "error", message: "Message is required" });
     }
 
     // 🚀 Send data to backend
     try {
-      const response = await fetch(`${BASE_URL}/api/form/send-email`, {
+      const response = await fetch(`${BASE_URL}/api/growth-form/send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -112,11 +107,12 @@ export default function HomePage() {
           type: "success",
           message: "✅ Message sent successfully!",
         });
+
+        // Reset form
         setFormData({
           name: "",
           company: "",
           email: "",
-
           message: "",
         });
       } else {

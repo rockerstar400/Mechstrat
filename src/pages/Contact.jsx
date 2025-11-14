@@ -7,31 +7,55 @@ export default function ContactUs() {
     name: "",
     email: "",
     phone: "",
+    countryCode: "+91",
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  console.log("BASE_URL =", BASE_URL);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "name" && /\d/.test(value)) {
-      return;
-    }
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    if (name === "name" && /\d/.test(value)) return;
+
+    setFormData({ ...formData, [name]: value });
   };
 
-  //   if (name === "name" && /\d/.test(value)) {
-  //     return;
-  //   }
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.phone || formData.phone.length !== 10) {
       alert("❌ Please enter a valid 10-digit phone number.");
       return;
     }
-    console.log(formData);
-    alert("Message sent successfully!");
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}/api/contact-form/contact-email`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      alert("✅ Message sent successfully!");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        countryCode: "+91",
+        message: "",
+      });
+    } catch (error) {
+      console.error(error);
+      alert("❌ Failed to send message.");
+    }
+
+    setLoading(false);
   };
 
   return (

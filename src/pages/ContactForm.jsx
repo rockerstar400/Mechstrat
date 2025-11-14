@@ -2,6 +2,8 @@ import { useState } from "react";
 import Header from "../components/Header";
 // import Aibaner from "../assets/Aicompany.png";
 import Aibaner from "../assets/projectbanner.png";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -36,7 +38,7 @@ export default function ContactForm() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${BASE_URL}api/form/send-email`, {
+      const response = await fetch(`${BASE_URL}/api/inquiry-form/send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -121,18 +123,13 @@ export default function ContactForm() {
           {/* Date & Time */}
           <div>
             <label className="block text-gray-700 font-medium mb-2">Date</label>
-            <input
-              type={formData.datetime ? "datetime-local" : "text"}
-              name="datetime"
-              value={formData.datetime}
-              placeholder="d/m/y : --"
-              onFocus={(e) => (e.target.type = "datetime-local")}
-              onBlur={(e) => {
-                if (!formData.datetime) e.target.type = "text";
-              }}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+
+            <DatePicker
+              selected={formData.datetime}
+              onChange={(date) => setFormData({ ...formData, datetime: date })}
+              placeholderText="Select Date"
+              dateFormat="d/M/yy" // <--- d/m/y format
+              className="   w-full  lg:w-[610px] border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
           </div>
 
